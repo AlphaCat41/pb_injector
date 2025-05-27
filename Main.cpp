@@ -2,6 +2,7 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 #include <iostream>
+#include <string> 
 
 DWORD GetProcessIdByName (const std::wstring& processName) {
 	DWORD pid = 0;
@@ -82,24 +83,23 @@ int main () {
 	std::wstring targetProcessName;
 	std::string dllPath;
 
-	/*std::wcout << L"ชื่อโปรเซส (เช่น: PointBlank.exe): ";
+	std::wcout << L"ชื่อโปรเซส (เช่น: PointBlank.exe): ";
 	std::getline (std::wcin, targetProcessName);
-
-	std::cout << "เส้นทาง DLL (เช่น: C:\\hack\\wallhack.dll): ";
-	std::getline (std::cin, dllPath);*/
-	targetProcessName = L"PointBlank.exe";
-	dllPath = "C:\\Users\\DELL\\Desktop\\cpp_repos\\pb_hack\\Debug\\pb_hack.dll";
 
 	DWORD pid = GetProcessIdByName (targetProcessName);
 	if (!pid) {
 		std::cerr << "[-] ไม่พบโปรเซสที่ระบุ" << std::endl;
+		system ("pause");
 		return 1;
 	}
+	std::cout << "เส้นทาง DLL (เช่น: C:\\hack\\wallhack.dll): ";
+	std::getline (std::cin, dllPath);
 
 	if (!InjectDLL (pid, dllPath)) {
 		std::cerr << "[-] Inject DLL ไม่สำเร็จ" << std::endl;
+		system ("pause");
 		return 1;
 	}
-
+	system ("pause"); // Pause to see the output before closing
 	return 0;
 }
