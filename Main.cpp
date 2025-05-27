@@ -80,11 +80,11 @@ bool InjectDLL (DWORD processId, const std::string& dllPath) {
 }
 
 int main () {
-	std::wstring targetProcessName;
+	std::wstring targetProcessName = L"PointBlank.exe";
 	std::string dllPath;
 
-	std::wcout << L"Target process name: ";
-	std::getline (std::wcin, targetProcessName);
+	/*std::wcout << L"Target process name: ";
+	std::getline (std::wcin, targetProcessName);*/
 
 	DWORD pid = GetProcessIdByName (targetProcessName);
 	if (!pid) {
