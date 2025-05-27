@@ -83,20 +83,20 @@ int main () {
 	std::wstring targetProcessName;
 	std::string dllPath;
 
-	std::wcout << L"ชื่อโปรเซส (เช่น: PointBlank.exe): ";
+	std::wcout << L"Target process name: ";
 	std::getline (std::wcin, targetProcessName);
 
 	DWORD pid = GetProcessIdByName (targetProcessName);
 	if (!pid) {
-		std::cerr << "[-] ไม่พบโปรเซสที่ระบุ" << std::endl;
+		std::cerr << "[-] Cannot find the process" << std::endl;
 		system ("pause");
 		return 1;
 	}
-	std::cout << "เส้นทาง DLL (เช่น: C:\\hack\\wallhack.dll): ";
+	std::cout << "DLL path (ex: C:\\hack\\wallhack.dll): ";
 	std::getline (std::cin, dllPath);
 
 	if (!InjectDLL (pid, dllPath)) {
-		std::cerr << "[-] Inject DLL ไม่สำเร็จ" << std::endl;
+		std::cerr << "[-] Inject DLL failed" << std::endl;
 		system ("pause");
 		return 1;
 	}
